@@ -1,0 +1,8 @@
+---
+- name: Packer test
+  hosts: 127.0.0.1
+  sudo: True
+  tasks:
+    - name: add me!
+      user: name=rsherman password=$6$rounds=100000$/sbCxjESWarMAVsk$/4ebpSQFhVOaejy6cEQ4b6ZjzeP4bG/d5Y27.VGBZwNIgRsKDz1Szw/X0KEmvdNINTFectXjMDI3BXkalMlA.1 shell=/bin/bash groups=sudo
+    - authorized_key: user=rsherman key=https://github.com/simplycycling.keys
