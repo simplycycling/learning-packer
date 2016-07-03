@@ -2,7 +2,19 @@
 - name: Packer test
   hosts: 127.0.0.1
   sudo: True
+  vars:
+    user: rsherman
+    password: $6$rounds=100000$/sbCxjESWarMAVsk$/4ebpSQFhVOaejy6cEQ4b6ZjzeP4bG/d5Y27.VGBZwNIgRsKDz1Szw/X0KEmvdNINTFectXjMDI3BXkalMlA.1
+    key: https://github.com/simplycycling.keys
+
+  # Obviously, change the vars to your username, your password and your ssh key.
+  # To get an encrypted password that works well with Ansible, like I have above,
+  # go to
+  # https://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+  # and follow the instructions. Plain text is for suckas.
+
   tasks:
     - name: add me!
-      user: name=rsherman password=$6$rounds=100000$/sbCxjESWarMAVsk$/4ebpSQFhVOaejy6cEQ4b6ZjzeP4bG/d5Y27.VGBZwNIgRsKDz1Szw/X0KEmvdNINTFectXjMDI3BXkalMlA.1 shell=/bin/bash groups=sudo
-    - authorized_key: user=rsherman key=https://github.com/simplycycling.keys
+      user: name={{ user }} password={{ password }} shell=/bin/bash groups=sudo
+    - authorized_key: user={{ user }} key={{ key }}
+
